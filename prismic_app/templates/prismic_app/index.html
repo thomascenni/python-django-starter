@@ -2,10 +2,12 @@
 
 {% block content %}
 
+    {% comment "search view not implemented" %}
     <form action="/search" method="GET">
         <input type="text" name="q" value="">
         <input type="submit" value="Search">
-    </form>
+    </form>    
+    {% endcomment %}
     <hr />
 
     {% if documents %}
@@ -25,7 +27,7 @@
         <ul>
             {% for document in documents %}
                 <li>
-                    <a href="{% url 'prismic:document' id=document.id slug=document.slug %}">
+                    <a href="{% url 'document' id=document.id slug=document.slug %}">
                         {{ document.slug }}
                     </a>
                 </li>
