@@ -42,6 +42,18 @@ class PrismicHelper(object):
         else:
             raise Http404
 
+    def get_document_by_uid(self, document_uid, form_name="everything"):
+        form = self.form(form_name)
+        # print(document_uid)
+        form.query(predicates.at('my.post.uid', document_uid))
+        # print(form)
+        document = form.submit().documents
+        if document:
+            return document[0]
+        else:
+            raise Http404
+
+
     def get_context(self):
         """Add context to the view dictionary"""
         return {

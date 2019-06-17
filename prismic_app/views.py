@@ -11,13 +11,7 @@ from prismic import PREVIEW_COOKIE
 #log = logging.getLogger(__name__)
 
 def link_resolver(document_link):
-    """
-    Creates a local link to document.
-
-    document_link -- Fragment.DocumentLink object
-    """
-
-    return reverse('prismic:document', kwargs={'id': document_link.get_document_id(), 'slug': document_link.get_document_slug()})
+    return reverse('prismic:document', kwargs={'id': document_link.get_document_id(), 'uid': document_link.get_document_uid()})
 
 
 def index(request):
@@ -30,10 +24,10 @@ def index(request):
     return render(request, 'prismic_app/index.html', parameters)
 
 
-def detail(request, id, slug):
+def detail(request, uid):
     prismic = PrismicHelper(request)
 
-    document = prismic.get_document(id)
+    document = prismic.get_document_by_uid(uid)
 
     parameters = {'context': prismic.get_context(), 'document': document}
     return render(request, 'prismic_app/detail.html', parameters)

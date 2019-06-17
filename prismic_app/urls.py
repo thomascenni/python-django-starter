@@ -8,8 +8,8 @@ urlpatterns = [
         view=views.index,
         name='index'
     ),
-    re_path(
-        route=r'^document/(?P<id>[-_a-zA-Z0-9]{16})/(?P<slug>.*)',
+    path(
+        route='post/<slug:uid>',
         view=views.detail,
         name='document'
     ),
